@@ -1,14 +1,18 @@
 <?php
 function get_articles(){
+    $Link = mysqli_connect('localhost','dbuser','123','like');
     $Articles=array();
     $Query= 'SELECT * FROM Article';
-    $Result=  mysqli_query($Link, $Query);
-    $Results=  mysqli_fetch_assoc($Result);
-    //$Row=mysqli_fetch_assoc($Query);
-    print_r($Results);
-//    while($Row<=  mysqli_num_rows($Query)){
-//        echo $Row['ArticleTitle'],'<br>';
-//    }
+    $Result=  mysqli_query($Link,$Query);
+    while($Row=mysqli_fetch_assoc($Result)){
+       // echo $Row['ArticleTitle'],'<br>';
+        $articles[]=array(
+            'ArticleId'=>$Row['ArticleId'],
+            'ArticleTitle'=>$Row['ArticleTitle'],
+            'ArticleLike'=>$Row['ArticleLike']
+        );
+   }
+   return $articles;
 }
 
 ?>
